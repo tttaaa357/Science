@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 model = ccsn.Bollig_2016(progenitor_mass=27<<u.Msun)
 #define the sampling points
 energy = np.linspace(1,100,800)<<u.MeV
-time = np.linspace(0,2,800)<<u.s
+time = np.linspace(0,1,800)<<u.s
 rc = RateCalculator()
 
 #создание своего детектора
@@ -60,10 +60,10 @@ def calc_rates(angles= [-90,90] <<u.deg,
         results += [r]
     return results
 
-angles = np.arange(-90,0,5)
+angles = np.arange(-90,2,1)
 rates = calc_rates(angles=angles<<u.deg)
 
 for angle, rate in zip(angles, rates):
-    filename = f'ibd_Juno_rate.{angle:d}.npz'
+    filename = f'ibd_Juno_rate_norm.{angle:d}.npz'
     print(f"saving rate for {angle=} to {filename=}")
     rate.save(filename)
